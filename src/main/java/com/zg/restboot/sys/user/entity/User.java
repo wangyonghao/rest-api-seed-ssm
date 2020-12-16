@@ -1,6 +1,5 @@
-package com.zg.restboot.user.entity;
+package com.zg.restboot.sys.user.entity;
 
-import com.sun.istack.internal.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 

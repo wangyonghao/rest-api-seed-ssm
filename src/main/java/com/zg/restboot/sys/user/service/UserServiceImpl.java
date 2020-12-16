@@ -1,8 +1,8 @@
-package com.zg.restboot.user.service;
+package com.zg.restboot.sys.user.service;
 
-import com.zg.restboot.user.dao.UserDao;
-import com.zg.restboot.user.entity.User;
-import com.zg.restboot.user.vo.UserQuery;
+import com.zg.restboot.sys.user.dao.UserDao;
+import com.zg.restboot.sys.user.entity.User;
+import com.zg.restboot.sys.user.vo.UserQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

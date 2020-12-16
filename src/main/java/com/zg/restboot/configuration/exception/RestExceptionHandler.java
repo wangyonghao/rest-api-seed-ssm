@@ -1,6 +1,6 @@
 package com.zg.restboot.configuration.exception;
 
-import com.zg.restboot.configuration.http.ResponseResult;
+import com.zg.restboot.common.http.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
-package com.zg.restboot.user.dao;
+package com.zg.restboot.sys.user.dao;
 
-import com.zg.restboot.user.entity.User;
-import com.zg.restboot.user.vo.UserQuery;
+import com.zg.restboot.sys.user.entity.User;
+import com.zg.restboot.sys.user.vo.UserQuery;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

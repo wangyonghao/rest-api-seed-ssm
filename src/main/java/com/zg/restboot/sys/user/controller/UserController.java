@@ -1,8 +1,8 @@
-package com.zg.restboot.user.controller;
+package com.zg.restboot.sys.user.controller;
 
-import com.zg.restboot.user.entity.User;
-import com.zg.restboot.user.service.UserService;
-import com.zg.restboot.user.vo.UserQuery;
+import com.zg.restboot.sys.user.entity.User;
+import com.zg.restboot.sys.user.service.UserService;
+import com.zg.restboot.sys.user.vo.UserQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

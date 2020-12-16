@@ -1,7 +1,7 @@
 package com.zg.restboot.configuration.exception;
 
 import com.zg.restboot.common.exception.BizException;
-import com.zg.restboot.configuration.response.ResponseResult;
+import com.zg.restboot.common.httpresponse.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -35,9 +35,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(BizException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseResult handleServiceException(BizException ex, HttpServletRequest request) {
+    public ErrorResult handleServiceException(BizException ex, HttpServletRequest request) {
         log.debug(this.logRequest(request),ex);
-        return ResponseResult.error(ex.getMessage());
+        return ErrorResult.error(ex.getMessage());
     }
 
     /**
@@ -48,9 +48,9 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public ResponseResult handleDefaultException(Exception ex, HttpServletRequest request) {
+    public ErrorResult handleDefaultException(Exception ex, HttpServletRequest request) {
         log.error(this.logRequest(request),ex);
-        return ResponseResult.error(500, "服务异常:"+ex.getMessage());
+        return ErrorResult.error(500, "服务异常:"+ex.getMessage());
     }
 
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");

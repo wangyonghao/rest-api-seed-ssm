@@ -1,4 +1,4 @@
-package com.zg.restboot.user.vo;
+package com.zg.restboot.sys.user.vo;
 
 import com.zg.restboot.common.page.Pageable;
 import lombok.Getter;
