@@ -28,35 +28,35 @@
 
 #### 名词
 
-名词就是表示一个资源或者服务，如 /users，/teachers，这里看到我用名词复数的形式描述某一资源，至于用单数还是复数每个人都有自己的见解，我在这里推荐使用复数，因为在现实世界中，资源多数是以集合的形式存在的
+名词就是表示一个资源或者服务，如 /userEntities，/teachers，这里看到我用名词复数的形式描述某一资源，至于用单数还是复数每个人都有自己的见解，我在这里推荐使用复数，因为在现实世界中，资源多数是以集合的形式存在的
 
 #### 动词 + 名词
 
-- `POST /users` 创建新用户
-- `GET /users` 查询所有用户
-- `PUT /users` 批量更新用户
-- `DELETE /users` 批量删除用户
-- `GET /users/12` 查询指定用户
-- `PUT /users/12` 更新指定用户
-- `DELETE /users/12` 删除指定用户
+- `POST /userEntities` 创建新用户
+- `GET /userEntities` 查询所有用户
+- `PUT /userEntities` 批量更新用户
+- `DELETE /userEntities` 批量删除用户
+- `GET /userEntities/12` 查询指定用户
+- `PUT /userEntities/12` 更新指定用户
+- `DELETE /userEntities/12` 删除指定用户
 
 #### 其他
 
 除了以上常用的动作，我们还会遇到导入、导出、上载、下载等场景
 
-- `GET /users/export/user.xlsx` 导出用户数据，文件名为user.xlsx
-- `POST /users/import` 使用Excel文件导入用户数据
+- `GET /userEntities/export/userEntity.xlsx` 导出用户数据，文件名为user.xlsx
+- `POST /userEntities/import` 使用Excel文件导入用户数据
 
 #### URL 层级
 
 现实中哪有这么简单的 CRUD，资源的相互关联与嵌套很常见，查找 id 是 12 的用户的所有帖子， 如何设计这个 URL，下面两种设计也会有争论：
 
 ```
-GET /users/12/postsGET 
+GET /userEntities/12/postsGET
 GET /posts?userId=12
 ```
 
-第一种出现两个名词主题（users/posts），会让人有几秒钟的猜想，这到底请求的是用户资源还是帖子资源，当存在更深浅套的时候也不容易扩展，所以我推荐第二种方式，主体名词 posts 资源明显，其他过滤条件也更容易扩展，比如 /posts?userName=zhangsan，我们可以复用同样的接口
+第一种出现两个名词主题（userEntities/posts），会让人有几秒钟的猜想，这到底请求的是用户资源还是帖子资源，当存在更深浅套的时候也不容易扩展，所以我推荐第二种方式，主体名词 posts 资源明显，其他过滤条件也更容易扩展，比如 /posts?userName=zhangsan，我们可以复用同样的接口
 
 ### 过滤/分页/排序
 
@@ -65,14 +65,14 @@ GET /posts?userId=12
 #### 过滤
 
 ```
-GET /users/12/posts?state=published
-GET /users/12/posts?published=true
+GET /userEntities/12/posts?state=published
+GET /userEntities/12/posts?published=true
 ```
 
 #### 分页
 
 ```
-GET /users?page=2&perpage=20
+GET /userEntities?pageParam=2&perpage=20
 ```
 
 以分页方式查询用户列表，显示第 2 页内容，每页显示 20 条信息
@@ -80,7 +80,7 @@ GET /users?page=2&perpage=20
 #### 排序
 
 ```
-GET /users?sort=score_desc
+GET /userEntities?sort=score_desc
 ```
 
 按照学生分数降序进行排序
@@ -92,10 +92,10 @@ GET /users?sort=score_desc
 我们看到过很多如下 URL 设计，用来区分 API 版本：
 
 ```
-POST /v2/usersGET /V1/users/12
+POST /v2/usersGET /V1/userEntities/12
 ```
 
-我们都指向同样的资源 users，URL 中为什么要加版本号呢？ 针对这个问题，答案依旧没有统一标准，如果多个版本的API版本返回数据结果结构一样，那没必要区分版本，如果结构已经发生变化，而且要向下兼容，那版本号是很好的区分方式，而且通过 URL 加版本的方式可以更好的发现资源
+我们都指向同样的资源 userEntities，URL 中为什么要加版本号呢？ 针对这个问题，答案依旧没有统一标准，如果多个版本的API版本返回数据结果结构一样，那没必要区分版本，如果结构已经发生变化，而且要向下兼容，那版本号是很好的区分方式，而且通过 URL 加版本的方式可以更好的发现资源
 
 ## 二、HTTP篇
 
@@ -153,9 +153,9 @@ API 返回的数据格式，不应该是纯文本，而应该是一个 JSON 对�
 Swagger是一种广泛使用的工具来用来记录与呈现 REST API，它提供了一种探索特定 API 使用的方法，因此允许开发人员理解底层的语义行为。 这是一种使用注释添加文档的声明性方法，它进一步生成描述 API 及其用法的 JSON，可以实时应对 API 的更新，具体请参考 Swagger 官网 , 同时使用 Spring Boot 的小伙伴也可以很轻松的集成 Swagger，只需引入Swagger Starter
 
 ```xml
-<dependency>    
-  <groupId>com.spring4all</groupId>    
-  <artifactId>swagger-spring-boot-starter</artifactId>    
+<dependency>
+  <groupId>com.spring4all</groupId>
+  <artifactId>swagger-spring-boot-starter</artifactId>
   <version>1.9.0.RELEASE</version>
 </dependency>
 ```

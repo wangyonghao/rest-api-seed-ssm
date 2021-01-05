@@ -1,11 +1,11 @@
-package com.zg.restboot.sys.user.service;
+package com.zg.restboot.sys2.user.service;
 
 import com.zg.restboot.common.page.PageParam;
 import com.zg.restboot.common.page.PageResult;
-import com.zg.restboot.sys.user.service.dto.UserInsertDTO;
-import com.zg.restboot.sys.user.service.dto.UserQueryDTO;
-import com.zg.restboot.sys.user.service.dto.UserUpdateDTO;
-import com.zg.restboot.sys.user.service.vo.UserVO;
+import com.zg.restboot.sys2.user.service.dto.UserInsertDTO;
+import com.zg.restboot.sys2.user.service.dto.UserQueryDTO;
+import com.zg.restboot.sys2.user.service.dto.UserUpdateDTO;
+import com.zg.restboot.sys2.user.service.vo.UserVO;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * 用户表(User)表服务接口
  *
  * @author wangyonghao@163.com
- * @since 2021-01-05 19:49:20
+ * @since 2020-12-30 20:08:23
  */
 public interface UserService {
 
@@ -32,20 +32,20 @@ public interface UserService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    PageResult<UserVO> find(PageParam pageParam, UserQueryDTO queryDTO);
+    PageResult<UserVO> find(UserQueryDTO queryDTO, PageParam pageParam);
 
     /**
-     * 新增
+     * 新增数据
      *
-     * @param insertDTO 待插入的对象
-     * @return 新增的对象
+     * @param userEntity 实例对象
+     * @return 实例对象
      */
     UserVO save(UserInsertDTO insertDTO);
 
     /**
      * 修改数据
      *
-     * @param updateDTO 待更新的对象
+     * @param userEntity 实例对象
      * @return 实例对象
      */
     UserVO update(Long id, UserUpdateDTO updateDTO);
@@ -64,5 +64,6 @@ public interface UserService {
      * @param ids 主键集合
      * @return 是否成功
      */
-    boolean delete(List<Long> ids);
+    int delete(List<Long> ids);
+
 }

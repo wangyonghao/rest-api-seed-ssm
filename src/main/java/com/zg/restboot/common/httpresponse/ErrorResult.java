@@ -1,65 +1,43 @@
 package com.zg.restboot.common.httpresponse;
 
+import lombok.*;
+import org.springframework.http.HttpStatus;
+
 import java.io.Serializable;
+import java.time.Instant;
 
 /**
  * 返回值对象
  */
+@Builder
+@AllArgsConstructor
+@Getter
+@Setter
 public class ErrorResult implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 业务编码
+     * 异常码
      */
-    private Integer errcode = 0;
+    private String error;
 
     /**
-     * 业务信息
+     * 异常信息
      */
-    private String message = "success";
+    private String message;
 
     /**
-     * 业务内容
+     * Debug信息
      */
-    private Object data;
-    private ErrorResult() {}
+    private String debug;
 
     /**
-     * 返回成功
-     * @return
+     * 请求路径
      */
-    public static ErrorResult ok() {
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.errcode = 0;
-        return errorResult;
-    }
+    private String path;
 
-    public static ErrorResult ok(Serializable data) {
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.errcode = 0;
-        errorResult.data = data;
-        return errorResult;
-    }
-
-    public static ErrorResult ok(String message, Object data) {
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.errcode = 0;
-        errorResult.data = data;
-        errorResult.message = message;
-        return errorResult;
-    }
-
-    public static ErrorResult error(String message) {
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.errcode = 500;
-        errorResult.message = message;
-        return errorResult;
-    }
-
-    public static ErrorResult error(Integer code, String message) {
-        ErrorResult errorResult = new ErrorResult();
-        errorResult.errcode = code;
-        errorResult.message = message;
-        return errorResult;
-    }
+    /**
+     * 请求时间
+     */
+    private Instant timestamp = Instant.now();
 }

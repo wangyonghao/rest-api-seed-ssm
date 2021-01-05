@@ -1,11 +1,13 @@
 package com.zg.restboot.common.page;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
 /**
  * 分页查询参数
  * @author wangyonghao
  * @date 12/15/20
  */
-public abstract class Pageable {
+public class PageParam {
     static final int MAX_PERPAGE = 500; // 最大每页显示数量
     static final int MIN_PAGE = 1; // 最小页码
 
@@ -33,5 +35,18 @@ public abstract class Pageable {
             perpage = MAX_PERPAGE;
         }
         this.perpage = perpage;
+    }
+
+    /**
+     * 将 PageQuery 转换为 IPage<T>
+     * @param pageParam
+     * @param <T>
+     * @return
+     */
+    public static <T> IPage<T> toIPage(PageParam pageParam){
+        IPage<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>();
+        page.setCurrent(pageParam.getPage());
+        page.setSize(pageParam.getPerpage());
+        return page;
     }
 }

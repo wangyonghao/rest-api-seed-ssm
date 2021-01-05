@@ -1,68 +1,102 @@
 package com.zg.restboot.sys.user.service;
 
-import com.zg.restboot.sys.user.dao.UserDao;
-import com.zg.restboot.sys.user.entity.User;
-import com.zg.restboot.sys.user.vo.UserQuery;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zg.restboot.common.page.PageParam;
+import com.zg.restboot.common.page.PageResult;
+import com.zg.restboot.sys.user.dao.UserMapper;
+import com.zg.restboot.sys.user.dao.entity.UserEntity;
+import com.zg.restboot.sys.user.service.dto.UserInsertDTO;
+import com.zg.restboot.sys.user.service.dto.UserQueryDTO;
+import com.zg.restboot.sys.user.service.dto.UserUpdateDTO;
+import com.zg.restboot.sys.user.service.vo.UserVO;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * UserService
- * @author wangyonghao
- * @date 12/15/20
+ * 用户表(User)表业务类
+ *
+ * @author wangyonghao@163.com
+ * @since 2021-01-05 20:14:06
  */
 @Service
-public class UserServiceImpl implements UserService{
-    final UserDao dao;
+public class UserServiceImpl implements UserService {
+    @Resource
+    private UserMapper mapper;
 
-    public UserServiceImpl(UserDao userDao) {
-        this.dao = userDao;
-    }
-
-    @Transactional(rollbackFor = Exception.class)
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
     @Override
-    public User save(User user) {
-        dao.insert(user);
-        return user;
+    public UserVO get(Long id) {
+        UserEntity entity = this.mapper.selectById(id);
+        return UserAssembler.toVO(entity);
     }
 
     /**
-     * 查询用户
-     * @param userQuery
-     * @return 查询结果为空时，返回空集合
+     * 查询多条数据
+     *
+     * @param offset 查询起始位置
+     * @param limit  查询条数
+     * @return 对象列表
      */
     @Override
-    public List<User> find(UserQuery userQuery) {
-        return dao.select(userQuery);
+    public PageResult<UserVO> find(PageParam pageParam, UserQueryDTO dto) {
+        IPage<UserEntity> page = this.mapper.selectPage(PageParam.toIPage(pageParam), new QueryWrapper<>(UserAssembler.toEntity(dto)));
+        return UserAssembler.toPageResult(page);
     }
 
+
+    /**
+     * 新增数据
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
     @Override
-    public User get(String id) {
-        User user = dao.getById(id);
-        return null;
+    public UserVO save(UserInsertDTO insertDTO) {
+        UserEntity entity = UserAssembler.toEntity(insertDTO);
+        this.mapper.insert(entity);
+        return UserAssembler.toVO(entity);
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    /**
+     * 修改数据
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
     @Override
-    public User update(User user) {
-        dao.update(user);
-        return user;
+    public UserVO update(Long id, UserUpdateDTO updateDTO) {
+        UserEntity entity = UserAssembler.toEntity(id, updateDTO);
+        this.mapper.updateById(entity);
+        return this.get(id);
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
     @Override
-    public void delete(String id) {
-        User user = this.get(id);
-        dao.delete(id);
+    public boolean delete(Long id) {
+        return this.mapper.deleteById(id) == 1;
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    /**
+     * 批量删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
     @Override
-    public void deleteAll(String[] ids) {
-        for(String id : ids){
-            this.delete(id);
-        }
+    public boolean delete(List<Long> ids) {
+        return this.mapper.deleteBatchIds(ids) == ids.size();
     }
 }

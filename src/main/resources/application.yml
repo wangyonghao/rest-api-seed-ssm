@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sys_rbac
+    username: dbuser
+    password: dbuser
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+mybatis-plus:
+  configuration:
+    # 枚举处理类，使之支持枚举类继承IEnum接口或字段标记@EnumValue注解
+    default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+## Logger Config
+logging:
+  level:
+    com.zg.restroot: debug
+    org.apache.ibatis: debug

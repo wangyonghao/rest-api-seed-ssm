@@ -1,4 +1,4 @@
-package com.zg.restboot.configuration.exception;
+package com.zg.restboot.autoconfig.exception;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
