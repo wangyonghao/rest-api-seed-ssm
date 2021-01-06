@@ -21,7 +21,7 @@ import java.util.Objects;
  * 用户表(User)表控制层
  *
  * @author wangyonghao@163.com
- * @since 2021-01-05 19:49:16
+ * @since 2021-01-06 13:59:00
  */
 @Api(tags = "用户表(User)接口")
 @RestController
@@ -38,6 +38,7 @@ public class UserController {
      * @return 新增结果
      */
     @ApiOperation("新增数据")
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public UserVO save(@RequestBody UserInsertDTO dto) {
         return this.service.save(dto);
@@ -106,7 +107,9 @@ public class UserController {
      */
     @ApiOperation("批量删除数据")
     @DeleteMapping
-    public void delete(@RequestParam("ids") List<Long> idList) {
-        this.service.delete(idList);
+    public void delete(@RequestParam("ids") List<Long> idList, HttpServletResponse response) {
+        if(!this.service.delete(idList)){
+            response.setStatus(HttpStatus.NO_CONTENT.value());
+        }
     }
 }

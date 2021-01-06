@@ -42,6 +42,13 @@ public class $!{className} {
         return vo;
     }
 
+    public static List<$!{tableInfo.name}VO> toVOList(List<$!{tableInfo.name}Entity> entities) {
+        if (Objects.isNull(entities)) {
+            return new ArrayList<>();
+        }
+        return entities.stream().map($!{tableInfo.name}Assembler::toVO).collect(Collectors.toList());
+    }
+
     public static $!{tableInfo.name}Entity toEntity($!{tableInfo.name}QueryDTO dto){
         if(Objects.isNull(dto)){
             return null;

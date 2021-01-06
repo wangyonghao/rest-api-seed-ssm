@@ -1,7 +1,8 @@
 package com.zg.restboot.sys2.user.service;
 
-import com.zg.restboot.sys2.user.service.dto.UserInsertDTO;
-import com.zg.restboot.sys2.user.service.vo.UserVO;
+import com.zg.restboot.sys.user.service.UserService;
+import com.zg.restboot.sys.user.service.dto.UserInsertDTO;
+import com.zg.restboot.sys.user.service.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,25 +27,31 @@ class UserServiceImplTest {
     @Test
     void CURD() {
         UserInsertDTO insertDTO = UserInsertDTO.builder().username("test").password("test").build();
-        UserVO entity = service.save(insertDTO);
-        Assertions.assertNotNull(entity);
+        // test insert
+        UserVO vo = service.save(insertDTO);
+        Assertions.assertNotNull(vo);
 
-        Long id = entity.getId();
-        UserVO getVo = service.get(entity.getId());
-        Assertions.assertEquals(entity.getUsername(),getVo.getUsername());
-        Assertions.assertEquals(entity.getPassword(),getVo.getPassword());
-        Assertions.assertFalse((Boolean) getVo.getDeleted());
+        // test get
+        vo = service.get(vo.getId());
+        Assertions.assertNotNull(vo);
 
+        Assertions.assertEquals(vo.getUsername(),insertDTO.getUsername());
+        Assertions.assertEquals(vo.getPassword(),insertDTO.getPassword());
+        Assertions.assertFalse(vo.getDeleted());
+        Assertions.assertNotNull(vo.getCreateTime());
+        Assertions.assertNotNull(vo.getCreateUser());
+        Assertions.assertNotNull(vo.getUpdateTime());
+        Assertions.assertNotNull(vo.getUpdateUser());
 
-        service.delete(id);
-        getVo = service.get(entity.getId());
-        Assertions.assertEquals(getVo.getDeleted(),0);
-
-
+        // test delete
+        service.delete(vo.getId());
+        vo = service.get(vo.getId());
+        Assertions.assertNull(vo);
     }
 
     @Test
     void find() {
+
     }
 
     @Test

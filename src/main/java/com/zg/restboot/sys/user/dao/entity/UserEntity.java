@@ -6,10 +6,10 @@ import java.io.Serializable;
 import java.time.Instant;
 
 /**
- * 用户表(User)分页查询结构体
+ * 用户表(User)实体类
  *
  * @author wangyonghao@163.com
- * @date 2021-01-05 17:25:28
+ * @since 2021-01-05 21:47:36
  */
 @TableName("sys_user")
 public class UserEntity implements Serializable {
@@ -21,19 +21,19 @@ public class UserEntity implements Serializable {
     /**
      * 用户名
      */
-    @TableField("username")
+    @TableField(value = "username")
     private String username;
 
     /**
      * 密码，MD5加密
      */
-    @TableField("password")
+    @TableField(value = "password")
     private String password;
 
     /**
      * 状态，1-激活 2-停用
      */
-    @TableField("state")
+    @TableField(value = "state")
     private Integer state;
 
     /**
@@ -41,7 +41,7 @@ public class UserEntity implements Serializable {
      */
     @TableField(value = "deleted", fill = FieldFill.INSERT)
     @TableLogic
-    private Object deleted;
+    private Boolean deleted;
 
     /**
      * 创建时间
@@ -101,11 +101,11 @@ public class UserEntity implements Serializable {
         this.state = state;
     }
 
-    public Object getDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Object deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 

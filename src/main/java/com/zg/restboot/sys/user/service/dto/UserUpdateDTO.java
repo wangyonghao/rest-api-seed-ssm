@@ -1,11 +1,21 @@
 package com.zg.restboot.sys.user.service.dto;
 
+import io.swagger.annotations.ApiModel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * 用户表(User)UpdateDTO
  *
  * @author wangyonghao@163.com
- * @date 2021-01-05 17:26:47
+ * @since 2021-01-06 13:20:39
  */
+@ApiModel("UserUpdateDTO")
+@Getter
+@Setter
+@Builder
 public class UserUpdateDTO {
     /**
      * 用户名

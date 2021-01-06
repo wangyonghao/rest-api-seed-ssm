@@ -10,7 +10,7 @@ import java.time.Instant;
  * 用户表(User)VO
  *
  * @author wangyonghao@163.com
- * @date 2021-01-05 17:35:57
+ * @since 2021-01-05 20:48:18
  */
 @ApiModel("sys_user")
 public class UserVO implements Serializable {
@@ -42,7 +42,7 @@ public class UserVO implements Serializable {
      * 删除标识，0-未删除 1-已删除
      */
     @ApiModelProperty("删除标识，0-未删除 1-已删除")
-    private Object deleted;
+    private Boolean deleted;
 
     /**
      * 创建时间
@@ -101,11 +101,11 @@ public class UserVO implements Serializable {
         this.state = state;
     }
 
-    public Object getDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Object deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 

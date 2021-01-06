@@ -18,7 +18,7 @@ public class MybatisPlusConfig {
     public MapperScannerConfigurer mapperScannerConfigurer(){
         MapperScannerConfigurer scannerConfigurer = new MapperScannerConfigurer();
         //可以通过环境变量获取你的mapper路径,这样mapper扫描可以通过配文件配置了
-        scannerConfigurer.setBasePackage("com.zg.restboot.*.*.domain.mapper");
+        scannerConfigurer.setBasePackage("com.zg.restboot.**.dao");
         return scannerConfigurer;
     }
 
@@ -38,7 +38,7 @@ public class MybatisPlusConfig {
             @Override
             public void insertFill(MetaObject metaObject) {
                 Instant now = Instant.now();
-                this.setFieldValByName("deleted",0,metaObject);
+                this.setFieldValByName("deleted",false,metaObject);
                 this.setFieldValByName("createTime", now, metaObject);
                 this.setFieldValByName("createUser", 12L, metaObject); // todo 获取当前用户
                 this.setFieldValByName( "updateTime", now, metaObject);

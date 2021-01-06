@@ -11,6 +11,7 @@ import com.zg.restboot.sys.user.service.dto.UserQueryDTO;
 import com.zg.restboot.sys.user.service.dto.UserUpdateDTO;
 import com.zg.restboot.sys.user.service.vo.UserVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  * 用户表(User)表业务类
  *
  * @author wangyonghao@163.com
- * @since 2021-01-05 20:14:06
+ * @since 2021-01-06 14:08:34
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService {
      * @param user 实例对象
      * @return 实例对象
      */
+    @Transactional
     @Override
     public UserVO save(UserInsertDTO insertDTO) {
         UserEntity entity = UserAssembler.toEntity(insertDTO);
@@ -71,6 +73,7 @@ public class UserServiceImpl implements UserService {
      * @param user 实例对象
      * @return 实例对象
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public UserVO update(Long id, UserUpdateDTO updateDTO) {
         UserEntity entity = UserAssembler.toEntity(id, updateDTO);
@@ -84,6 +87,7 @@ public class UserServiceImpl implements UserService {
      * @param id 主键
      * @return 是否成功
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean delete(Long id) {
         return this.mapper.deleteById(id) == 1;
@@ -95,6 +99,7 @@ public class UserServiceImpl implements UserService {
      * @param id 主键
      * @return 是否成功
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean delete(List<Long> ids) {
         return this.mapper.deleteBatchIds(ids) == ids.size();
