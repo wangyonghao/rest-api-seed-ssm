@@ -1,4 +1,4 @@
-package com.zg.restboot.autoconfig.exception;
+package com.zg.restboot.config.mvc;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 在Spring MVC处理请求之前, 缓存请求体,以便于异常处理器中打印
+ * 请求过滤器，在Spring MVC处理请求之前, 缓存请求体,以便于异常处理器中打印
  * @author wangyonghao
  * @date 12/12/20
  */

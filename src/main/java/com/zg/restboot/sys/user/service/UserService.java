@@ -2,67 +2,52 @@ package com.zg.restboot.sys.user.service;
 
 import com.zg.restboot.common.page.PageParam;
 import com.zg.restboot.common.page.PageResult;
-import com.zg.restboot.sys.user.service.dto.UserInsertDTO;
-import com.zg.restboot.sys.user.service.dto.UserQueryDTO;
-import com.zg.restboot.sys.user.service.dto.UserUpdateDTO;
-import com.zg.restboot.sys.user.service.vo.UserVO;
+import com.zg.restboot.sys.user.domain.dto.UserAddDTO;
+import com.zg.restboot.sys.user.domain.dto.UserQueryDTO;
+import com.zg.restboot.sys.user.domain.dto.UserUpdateDTO;
+import com.zg.restboot.sys.user.domain.vo.UserVO;
+import com.zg.restboot.sys.user.repository.UserRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 用户表(User)表服务接口
+ * 用户 业务
  *
  * @author wangyonghao@163.com
- * @since 2021-01-05 19:49:20
+ * @version 2021.02.06
  */
-public interface UserService {
+@Service
+public class UserService {
+    @Resource
+    private UserRepository repository;
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    UserVO get(Long id);
+    public UserVO getById(Long id) {
+        return this.repository.getById(id);
+    }
 
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    PageResult<UserVO> find(PageParam pageParam, UserQueryDTO queryDTO);
+    public List<UserVO> search(UserQueryDTO queryDTO) {
+        return this.repository.list(queryDTO);
+    }
 
-    /**
-     * 新增
-     *
-     * @param insertDTO 待插入的对象
-     * @return 新增的对象
-     */
-    UserVO save(UserInsertDTO insertDTO);
+    public PageResult<UserVO> searchPage(UserQueryDTO queryDTO, PageParam pageParam) {
+        return this.repository.listPage(queryDTO, pageParam);
+    }
 
-    /**
-     * 修改数据
-     *
-     * @param updateDTO 待更新的对象
-     * @return 实例对象
-     */
-    UserVO update(Long id, UserUpdateDTO updateDTO);
+    @Transactional(rollbackFor = Exception.class)
+    public UserVO add(UserAddDTO addDTO) {
+        return this.repository.add(addDTO);
+    }
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean delete(Long id);
+    @Transactional(rollbackFor = Exception.class)
+    public UserVO updateById(Long id, UserUpdateDTO updateDTO) {
+        return this.repository.updateById(id, updateDTO);
+    }
 
-    /**
-     * 批量删除数据
-     *
-     * @param ids 主键集合
-     * @return 是否成功
-     */
-    boolean delete(List<Long> ids);
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteById(Long id) {
+        return this.repository.deleteById(id);
+    }
 }

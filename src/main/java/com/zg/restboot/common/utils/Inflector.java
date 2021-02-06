@@ -1,6 +1,7 @@
 package com.zg.restboot.common.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,9 +13,9 @@ public class Inflector {
     private static final Pattern UNDERSCORE_PATTERN_1 = Pattern.compile("([A-Z]+)([A-Z][a-z])");
     private static final Pattern UNDERSCORE_PATTERN_2 = Pattern.compile("([a-z\\d])([A-Z])");
 
-    private static final List<RuleAndReplacement> plurals = new ArrayList<RuleAndReplacement>();
-    private static final List<RuleAndReplacement> singulars = new ArrayList<RuleAndReplacement>();
-    private static final List<String> uncountables = new ArrayList<String>();
+    private static final List<RuleAndReplacement> plurals = new ArrayList<>();
+    private static final List<RuleAndReplacement> singulars = new ArrayList<>();
+    private static final List<String> uncountables = new ArrayList<>();
 
     private static Inflector instance;
 
@@ -23,35 +24,28 @@ public class Inflector {
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         // 单数转复数
-//        System.out.println(Inflector.getInstance().pluralize("water"));
-//        System.out.println(Inflector.getInstance().pluralize("box"));
-//        System.out.println(Inflector.getInstance().pluralize("tomato"));
-//        System.out.println(Inflector.getInstance().pluralize("user"));
-//        System.out.println(Inflector.getInstance().pluralize("company"));
-//        System.out.println("aagquiz".replaceAll("(quiz)$", "$1zes"));
-//        System.out.println("aagox".replaceAll("(ox)$", "$1es"));
-//        System.out.println("amouse".replaceAll("([m|l])ouse$", "$1ice"));
-//        System.out.println("apex".replaceAll("(matr|vert|ind)ix|ex$", "$1ices"));
-//        System.out.println("cash".replaceAll("(x|ch|ss|sh)$", "$1es"));
-//        System.out.println("series".replaceAll("([^aeiouy]|qu)ies$", "$1y"));
-//        System.out.println("busy".replaceAll("([^aeiouy]|qu)y$", "$1ies"));
-//        System.out.println("hive".replaceAll("(hive)$", "$1s"));
-//        System.out.println("self".replaceAll("(?:([^f])fe|([lr])f)$", "$1$2ves"));
-//        System.out.println("analysis".replaceAll("sis$", "ses"));
-//        System.out.println("musium".replaceAll("([ti])um$", "$1a"));
-//        System.out.println("atomato".replaceAll("(buffal|tomat)o$", "$1oes"));
-//        System.out.println("keybus".replaceAll("(bu)s$", "$1es"));
-//        System.out.println("alias".replaceAll("(alias|status)$", "$1es"));
-//        System.out.println("virus".replaceAll("(octop|vir)us$", "$1i"));
-//        System.out.println("adjustis".replaceAll("(ax|test)is$", "$1es"));
-        System.out.println("as".replaceAll("s$", "s"));
-        System.out.println("user".replaceAll("$", "s"));
-        // 复数转单数
-//        System.out.println(Inflector.getInstance().singularize("apples"));
-
-
+        System.out.println(Inflector.pluralize("water"));
+        System.out.println(Inflector.pluralize("box"));
+        System.out.println(Inflector.pluralize("tomato"));
+        System.out.println(Inflector.pluralize("user"));
+        System.out.println(Inflector.pluralize("company"));
+        System.out.println("aagquiz".replaceAll("(quiz)$", "$1zes"));
+        System.out.println("aagox".replaceAll("(ox)$", "$1es"));
+        System.out.println("amouse".replaceAll("([m|l])ouse$", "$1ice"));
+        System.out.println("apex".replaceAll("(matr|vert|ind)ix|ex$", "$1ices"));
+        System.out.println("cash".replaceAll("(x|ch|ss|sh)$", "$1es"));
+        System.out.println("series".replaceAll("([^aeiouy]|qu)ies$", "$1y"));
+        System.out.println("busy".replaceAll("([^aeiouy]|qu)y$", "$1ies"));
+        System.out.println("hive".replaceAll("(hive)$", "$1s"));
+        System.out.println("self".replaceAll("(?:([^f])fe|([lr])f)$", "$1$2ves"));
+        System.out.println("analysis".replaceAll("sis$", "ses"));
+        System.out.println("musium".replaceAll("([ti])um$", "$1a"));
+        System.out.println("atomato".replaceAll("(buffal|tomat)o$", "$1oes"));
+        System.out.println("keybus".replaceAll("(bu)s$", "$1es"));
+        System.out.println("alias".replaceAll("(alias|status)$", "$1es"));
+        System.out.println("virus".replaceAll("(octop|vir)us$", "$1i"));
+        System.out.println("adjustis".replaceAll("(ax|test)is$", "$1es"));
     }
     private void initialize() {
         plural("$", "s");
@@ -104,7 +98,7 @@ public class Inflector {
         irregular("sex", "sexes");
         irregular("move", "moves");
 
-        uncountable(new String[] { "equipment", "information", "rice", "money", "species", "series", "fish", "sheep" });
+        uncountable("equipment", "information", "rice", "money", "species", "series", "fish", "sheep");
     }
 
     public static Inflector getInstance() {
@@ -174,9 +168,7 @@ public class Inflector {
     }
 
     public static void uncountable(String... words) {
-        for (String word : words) {
-            uncountables.add(word);
-        }
+        uncountables.addAll(Arrays.asList(words));
     }
 }
 

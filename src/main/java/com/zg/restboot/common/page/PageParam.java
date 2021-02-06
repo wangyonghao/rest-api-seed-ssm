@@ -5,8 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.lang.Nullable;
 
-import java.util.Objects;
-
 /**
  * 分页查询参数
  * @author wangyonghao
@@ -35,7 +33,7 @@ public class PageParam {
         this.page = page;
     }
 
-    public Integer getPerpage() {
+    public Integer getPerPage() {
         return perpage;
     }
 
@@ -52,10 +50,10 @@ public class PageParam {
      * @param <T>
      * @return
      */
-    public static <T> IPage<T> toIPage(PageParam pageParam){
+    public <T> IPage<T> extractIPage(){
         IPage<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>();
-        page.setCurrent(pageParam.getPage());
-        page.setSize(pageParam.getPerpage());
+        page.setCurrent(this.getPage());
+        page.setSize(this.getPerPage());
         return page;
     }
 }
