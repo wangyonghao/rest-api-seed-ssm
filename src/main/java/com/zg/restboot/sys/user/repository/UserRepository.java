@@ -2,6 +2,8 @@ package com.zg.restboot.sys.user.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zg.restboot.common.exception.DataNotFoundException;
+import com.zg.restboot.common.exception.ServerException;
 import com.zg.restboot.common.page.PageParam;
 import com.zg.restboot.common.page.PageResult;
 import com.zg.restboot.sys.user.domain.dto.UserAddDTO;
@@ -48,11 +50,16 @@ public class UserRepository {
     }
 
     public UserVO updateById(Long id, UserUpdateDTO updateDTO) {
+        DataNotFoundException.checkNotNull(this.getById(id), "用户不存在");
         this.mapper.updateById(updateDTO.toEntity());
         return this.getById(id);
     }
 
-    public boolean deleteById(Long id) {
-        return this.mapper.deleteById(id) == 1;
+    public void deleteById(Long id) {
+        DataNotFoundException.checkNotNull(this.getById(id), "用户不存在");
+        int effectiveCount = this.mapper.deleteById(id);
+        if (effectiveCount != 1) {
+            throw new ServerException("更新用户失败");
+        }
     }
 }

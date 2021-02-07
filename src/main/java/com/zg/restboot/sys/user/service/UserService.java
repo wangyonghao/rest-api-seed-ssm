@@ -47,7 +47,7 @@ public class UserService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteById(Long id) {
-        return this.repository.deleteById(id);
+    public void deleteById(Long id) {
+        this.repository.deleteById(id);
     }
 }

@@ -23,13 +23,4 @@ public class ClientException extends ApiException {
     public ClientException(String message, Throwable e) {
         super(message, e);
     }
-
-    /**
-     * 状态码，默认为 400
-     * @return
-     */
-    @Override
-    public int status() {
-        return HttpStatus.BAD_REQUEST.value();
-    }
 }

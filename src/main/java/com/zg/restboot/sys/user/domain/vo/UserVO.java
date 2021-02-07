@@ -3,6 +3,8 @@ package com.zg.restboot.sys.user.domain.vo;
 import com.zg.restboot.sys.user.domain.entity.UserEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -14,8 +16,10 @@ import java.time.Instant;
  * @author wangyonghao@163.com
  * @version 2021.02.06
  */
-@ApiModel("UserVO")
-public class UserVO implements Serializable {
+@ApiModel
+@Getter
+@Setter
+public class UserVO {
     /**
      * 主键
      */

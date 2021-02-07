@@ -3,6 +3,7 @@ package com.zg.restboot.common.exception;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import java.time.ZoneId;
 /**
  * 返回值对象
  */
-
+@Accessors(chain = true)
 @Getter
 @Setter
 public class ErrorResult implements Serializable {
@@ -35,7 +36,6 @@ public class ErrorResult implements Serializable {
     /**
      * Debug信息
      */
-    @JsonIgnore
     private String debug;
 
     /**
@@ -52,11 +52,8 @@ public class ErrorResult implements Serializable {
         return new ErrorResult();
     }
 
-    public static ErrorResult wrap(HttpServletRequest request, Exception ex){
+    public static ErrorResult wrapException(Exception ex){
         ErrorResult result = new ErrorResult();
-        result.setPath(request.getRequestURI());
-        result.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        result.setError(HttpStatus.INTERNAL_SERVER_ERROR.name());
         result.setMessage(ex.getLocalizedMessage());
         result.setDebug(ex.toString());
         return result;

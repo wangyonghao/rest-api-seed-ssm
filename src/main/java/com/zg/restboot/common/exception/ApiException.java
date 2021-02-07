@@ -21,12 +21,4 @@ public class ApiException extends RuntimeException {
     public ApiException(String message, Throwable e) {
         super(message, e);
     }
-
-    /**
-     * 预设 http 状态码
-     * @return http 状态码
-     */
-    public int status() {
-        throw new IllegalArgumentException("No value is set for status!");
-    }
 }

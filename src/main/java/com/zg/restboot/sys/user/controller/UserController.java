@@ -63,7 +63,7 @@ public class UserController {
 
     @ApiOperation("删除指定用户")
     @DeleteMapping("users/{id}")
-    public void delete(@PathVariable Long id, HttpServletResponse response) {
+    public void delete(@PathVariable Long id) {
         this.service.deleteById(id);
     }
 }

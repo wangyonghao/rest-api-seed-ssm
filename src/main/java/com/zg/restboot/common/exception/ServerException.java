@@ -24,12 +24,4 @@ public class ServerException extends ApiException {
     public ServerException(String message, Throwable e) {
         super(message, e);
     }
-
-    /**
-     * 状态码，默认为 500
-     * @return
-     */
-    public int status() {
-        return HttpStatus.INTERNAL_SERVER_ERROR.value();
-    }
 }

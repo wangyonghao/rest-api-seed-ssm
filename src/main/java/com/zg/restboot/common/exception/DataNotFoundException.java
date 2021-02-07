@@ -1,5 +1,6 @@
 package com.zg.restboot.common.exception;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.springframework.http.HttpStatus;
 
 import java.util.Objects;
@@ -26,18 +27,11 @@ public class DataNotFoundException extends ClientException {
         super(message, e);
     }
 
-    /**
-     * 状态码 404
-     * @return
-     */
-    @Override
-    public int status() {
-        return HttpStatus.NOT_FOUND.value();
-    }
-
-    public static void throwWhenNull(Object obj, String throwMesssage){
-        if(Objects.isNull(obj)){
+    @CanIgnoreReturnValue
+    public static <T> T checkNotNull(T reference, String throwMesssage){
+        if(Objects.isNull(reference)){
             throw new DataNotFoundException(throwMesssage);
         }
+        return reference;
     }
 }

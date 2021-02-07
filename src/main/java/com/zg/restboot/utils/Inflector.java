@@ -1,4 +1,4 @@
-package com.zg.restboot.common.utils;
+package com.zg.restboot.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

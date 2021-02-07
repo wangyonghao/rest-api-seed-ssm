@@ -14,19 +14,20 @@ import java.net.UnknownHostException;
 
 @Slf4j
 @SpringBootApplication
-public class RestBootApplication extends SpringBootServletInitializer {
+public class RestBootApplication{
 
     public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext application = SpringApplication.run(RestBootApplication.class, args);
         Environment env = application.getEnvironment();
         String ip = InetAddress.getLocalHost().getHostAddress();
         String port = env.getProperty("server.port");
-        String path = Strings.nullToEmpty(env.getProperty("server.servlet.context-path"));
-        log.info("\n----------------------------------------------------------\n\t" +
-                "Application Jeecg-Boot is running! Access URLs:\n\t" +
-                "Local: \t\thttp://localhost:" + port + path + "/\n\t" +
-                "External: \thttp://" + ip + ":" + port + path + "/\n\t" +
-                "Swagger文档: \thttp://" + ip + ":" + port + path + "/swagger-ui/\n" +
+        String contextPath = Strings.nullToEmpty(env.getProperty("server.servlet.context-path"));
+        log.info("\n----------------------------------------------------------\n" +
+                "Application running at:\n" +
+                "- Local:    http://localhost:" + port + contextPath + "/\n" +
+                "- Network:  http://" + ip + ":" + port + contextPath + "/\n" +
+                "- Api-docs: http://" + ip + ":" + port + contextPath + "/v3/api-docs\n" +
+                "- Api-ui:   http://" + ip + ":" + port + contextPath + "/swagger-ui/\n" +
                 "----------------------------------------------------------");
     }
 }
