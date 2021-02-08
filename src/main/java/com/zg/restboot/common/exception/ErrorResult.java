@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.Errors;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
@@ -36,7 +37,7 @@ public class ErrorResult implements Serializable {
     /**
      * Debug信息
      */
-    private String debug;
+    private String details;
 
     /**
      * 请求路径
@@ -55,7 +56,13 @@ public class ErrorResult implements Serializable {
     public static ErrorResult wrapException(Exception ex){
         ErrorResult result = new ErrorResult();
         result.setMessage(ex.getLocalizedMessage());
-        result.setDebug(ex.toString());
+        result.setDetails(ex.toString());
         return result;
+    }
+
+    public ErrorResult setHttpStatus(HttpStatus httpStatus){
+        this.setStatus(httpStatus.value());
+        this.setError(httpStatus.name());
+        return this;
     }
 }

@@ -11,20 +11,14 @@ import org.springframework.beans.BeanUtils;
  * 用户查询DTO
  *
  * @author wangyonghao@163.com
- * @version 2021.02.06
+ * @version 2021.02.07
  */
 @ApiModel
 @Getter
 @Setter
 public class UserQueryDTO {
-    /**
-     * 账号
-     */
     @ApiModelProperty("账号")
     private String username;
-    /**
-     * 昵称
-     */
     @ApiModelProperty("昵称")
     private String nickname;
 

@@ -1,4 +1,4 @@
-package com.zg.restboot.utils;
+package com.zg.restboot.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +27,7 @@ public final class RequestUtil {
             MediaType.MULTIPART_FORM_DATA
     );
 
-    public static StringBuilder getRequestString(HttpServletRequest request) {
+    public static String getRequestString(HttpServletRequest request) {
         StringBuilder log = new StringBuilder(1024);
         log.append(request.getMethod().toUpperCase());
         log.append(" ").append(getRequestURL(request));
@@ -36,21 +36,21 @@ public final class RequestUtil {
             log.append("?").append(request.getQueryString());
         }
         log.append(" ").append(getRequestBodyString(request));
-        return log;
+        return log.toString();
     }
 
-    public static StringBuilder getRequestBodyString(HttpServletRequest rawRequest) {
+    public static String getRequestBodyString(HttpServletRequest rawRequest) {
         // 如果未缓存request, Spring mvc 在解析参数之后，requestBody 流将会被关闭。
         // 必须使用 ContentCachingRequestWrapper 缓存，才能被读取到
         if (!(rawRequest instanceof ContentCachingRequestWrapper)) {
-            return new StringBuilder(0);
+            return "";
         }
         ContentCachingRequestWrapper request = (ContentCachingRequestWrapper) rawRequest;
 
         byte[] content = request.getContentAsByteArray();
         // body 为空时返回空字符串
         if(content.length == 0){
-            return new StringBuilder(0);
+            return "";
         }
 
         MediaType mediaType = MediaType.valueOf(request.getContentType());
@@ -67,11 +67,11 @@ public final class RequestUtil {
         } else {
             requestBodyString.append("[").append(content.length).append(" bytes content]");
         }
-        return requestBodyString;
+        return requestBodyString.toString();
     }
 
-    public static StringBuffer getRequestURL(HttpServletRequest request) {
-        StringBuffer url = new StringBuffer();
+    public static String getRequestURL(HttpServletRequest request) {
+        StringBuilder url = new StringBuilder();
         String scheme = request.getScheme();
         int port = request.getServerPort();
         if (port < 0) {
@@ -87,6 +87,6 @@ public final class RequestUtil {
         }
 
         url.append(request.getRequestURI());
-        return url;
+        return url.toString();
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Nullable;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,7 +34,7 @@ public class UserController {
     @ApiOperation("新增一个用户")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("users")
-    public UserVO add(@RequestBody UserAddDTO addDTO) {
+    public UserVO add(@Valid @RequestBody UserAddDTO addDTO) {
         return this.service.add(addDTO);
     }
 
