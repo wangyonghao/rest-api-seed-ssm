@@ -1,7 +1,5 @@
-package com.zg.restboot.config;
+package com.zg.restboot.integration;
 
-import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
-import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

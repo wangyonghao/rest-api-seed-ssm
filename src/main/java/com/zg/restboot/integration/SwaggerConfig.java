@@ -1,4 +1,4 @@
-package com.zg.restboot.config;
+package com.zg.restboot.integration;
 
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;

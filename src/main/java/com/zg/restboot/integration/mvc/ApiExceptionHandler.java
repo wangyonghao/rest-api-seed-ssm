@@ -1,4 +1,4 @@
-package com.zg.restboot.config.mvc;
+package com.zg.restboot.integration.mvc;
 
 import com.zg.restboot.common.exception.ClientException;
 import com.zg.restboot.common.exception.ErrorResult;

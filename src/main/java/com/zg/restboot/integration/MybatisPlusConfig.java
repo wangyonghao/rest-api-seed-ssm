@@ -1,4 +1,4 @@
-package com.zg.restboot.config;
+package com.zg.restboot.integration;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;

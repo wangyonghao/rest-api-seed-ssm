@@ -1,4 +1,4 @@
-package com.zg.restboot.config.mvc;
+package com.zg.restboot.integration.mvc;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;

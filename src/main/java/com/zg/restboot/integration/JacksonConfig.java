@@ -1,4 +1,4 @@
-package com.zg.restboot.config;
+package com.zg.restboot.integration;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;

@@ -1,4 +1,4 @@
-# api-boot
+# rest-boot
 API服务脚手架
 防御性编程
 开发理念
